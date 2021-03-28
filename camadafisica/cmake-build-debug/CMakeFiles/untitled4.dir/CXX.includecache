@@ -1,0 +1,24 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/mariana/CLionProjects/camadafisica/camadafisica.cpp
+iostream
+-
+stdio.h
+-
+stdint.h
+-
+string
+-
+
+/home/mariana/CLionProjects/camadafisica/simulador.cpp
+iostream
+-
+camadafisica.cpp
+/home/mariana/CLionProjects/camadafisica/camadafisica.cpp
+

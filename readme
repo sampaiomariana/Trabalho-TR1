@@ -1,0 +1,17 @@
+Trabalho 1: Simulador da camada física 
+Aluna: Mariana Borges de Sampaio
+Matrícula: 180046926
+
+	Sistema Operacional: Linux
+	Compilador: G++	
+	IDE: Clion
+	
+
+Para compilação foi toda feita via terminal, sendo necessário apenas estar dentro do diretório que contém todos os arquivos do simulador:
+- camadafisica.cpp
+- camadafisica.h
+- simulador.cpp
+
+Para compilar, siga o seguinte comando:
+>g++ -o teste simulador.cpp
+>./simulador
