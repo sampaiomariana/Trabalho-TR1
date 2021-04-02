@@ -1,15 +1,32 @@
 //
-// Created by mariana on 28/03/2021.
+// Created by Mariana de Sampaio on 28/03/2021.
 //
 
 #ifndef UNTITLED4_CAMADAFISICA_H
 #define UNTITLED4_CAMADAFISICA_H
 
-#endif //UNTITLED4_CAMADAFISICA_H
+
 using namespace std;
+void CamadaFisicaTrasnmissoraCodificacaoBinaria(int quadro[]);
 
-void AplicacaoTransmissora(void);
+void CamadaDeAplicacaoTransmissoraCodificacaoManchester(int quadro[]);
 
-void camadade_aplicacao_transmissora(string mensagem);
+void CamadaDeAplicacaoTransmissoraBipolar(int quadro[]);
 
-void camada_fisica_transmissora();
+void CamadaFisicaTrasnmissora(int quadro[]);
+
+void MeioDeComunicacao(int fluxoBrutoDeBits []);
+
+void   CamadaFisicaReceptora(int quadro []);
+
+void CamadaFisicaReceptoraDecodificacaoBinaria(int quadro[]);
+
+void CamadaDeAplicacaoReceptoraDecodificacaoManchester(int quadro []);
+
+void CamadaDeAplicacaoReceptoraDecodificacaoBipolar(int quadro []);
+
+void   CamadaFisicaReceptora(int quadro []);
+
+
+
+#endif //UNTITLED4_CAMADAFISICA_H
