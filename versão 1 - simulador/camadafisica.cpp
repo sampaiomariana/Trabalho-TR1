@@ -2,17 +2,41 @@
 // Created by mariana on 03/04/2021.
 //
 #include <iostream>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <math.h>
+#include "camadafisica.h"
 
 using namespace std;
 
-void binario_ascii(){
-    char mensagem;
-    cout << "Digite uma mensagem\n" << mensagem << endl;
-    cin >> mensagem;
+void conversor_ascii_binario(){
+    char mensagem[55];
+    int i;
 
-    cout << "\nValor na tabela ASCII:\n " << dec << int(mensagem);
-    cout << "\nValor na tabela ASCII:\n " << hex << int(mensagem);
-    
+
+    cout << "Digite uma mensagem:" << mensagem << endl;
+    cin >> mensagem;
+   // cout << "A mensagem digitada em binário eh :\n " << mensagem << endl;
+    cout << "A mensagem digitada em binário eh :" << endl;
+
+
+    // Conversor para binário
+    for (i =0; i < mensagem[i]!= '\0'; i++){
+        int aux;
+        aux = mensagem[i];
+        int j;
+        for (j = 7; j + 1 > 0; j--){
+            if (aux >=(1<< j)){
+                aux = aux - (1 << j);
+                cout << "1";
+            } else {
+                cout << "0";
+            }
+
+        }
+
+    }
 
 }
 void  CamadaFisicaTrasnmissoraCodificacaoBinaria(int quadro[]){
