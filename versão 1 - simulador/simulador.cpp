@@ -8,9 +8,7 @@ using namespace std;
 
 int main() {
 
-    int *quadro;
-    conversor_ascii_binario();
-    CamadaFisicaTrasnmissora(quadro);
+        CamadaFisicaTrasnmissora();
 
     return 0;
 

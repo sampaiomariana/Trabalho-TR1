@@ -15,10 +15,9 @@ void conversor_ascii_binario(){
     int i;
 
 
-    cout << "Digite uma mensagem:" << mensagem << endl;
+    cout << "Digite uma mensagem:" << endl;
     cin >> mensagem;
-   // cout << "A mensagem digitada em binário eh :\n " << mensagem << endl;
-    cout << "A mensagem digitada em binário eh :" << endl;
+    cout << "A mensagem digitada em binário eh :\n";
 
 
     // Conversor para binário
@@ -37,26 +36,31 @@ void conversor_ascii_binario(){
         }
 
     }
-
+    cout << "\n";
 }
-void  CamadaFisicaTrasnmissoraCodificacaoBinaria(int quadro[]){
-
-}
-
-void CamadaDeAplicacaoTransmissoraCodificacaoManchester(int quadro[]){
+void  CamadaFisicaTrasnmissoraCodificacaoBinaria(){
+    // int quadro[] deve ser utilizado apenas para a camada de enlace.
+    conversor_ascii_binario();
 
 }
 
-void CamadaDeAplicacaoTransmissoraBipolar(int quadro[]){
-
+void CamadaDeAplicacaoTransmissoraCodificacaoManchester(){
+    // int quadro[] deve ser utilizado apenas para a camada de enlace.
 }
-void CamadaFisicaTrasnmissora( int quadro[] ) {
+
+void CamadaDeAplicacaoTransmissoraBipolar(){
+    // int quadro[] deve ser utilizado apenas para a camada de enlace.
+}
+void CamadaFisicaTrasnmissora( ) {
+    // int quadro[] deve ser utilizado apenas para a camada de enlace.
+    //int quadro[];
     int tipoDeCodificacao;  // alterar de acordo com o teste
     int fluxoBrutoDeBits; // fluxoBrutodeBits[]
     int size;
+
     // Definindo um tamanho para o quadro
 
-    cout << "\nDefinindo o tamanho do quadro que será recebido: \n" << size <<endl;
+    //cout << "\nDefinindo o tamanho do quadro que será recebido: \n" << size <<endl;
 
     cout << "\nDigite qual a codificação você escolhe:\n 0 - Binária \n 1 - Manchester\n 2 - Bipolar\n";
     cin >> tipoDeCodificacao;
@@ -69,13 +73,13 @@ void CamadaFisicaTrasnmissora( int quadro[] ) {
 
     switch (tipoDeCodificacao) {
         case 0: // codificação binária
-            CamadaFisicaTrasnmissoraCodificacaoBinaria(quadro);
+            CamadaFisicaTrasnmissoraCodificacaoBinaria();
             break;
         case 1: // codificação Manchester
-            CamadaDeAplicacaoTransmissoraCodificacaoManchester(quadro);
+            CamadaDeAplicacaoTransmissoraCodificacaoManchester();
             break;
         case 2: // codificação bipolar
-            CamadaDeAplicacaoTransmissoraBipolar(quadro);
+            CamadaDeAplicacaoTransmissoraBipolar();
             break;
 
     }
