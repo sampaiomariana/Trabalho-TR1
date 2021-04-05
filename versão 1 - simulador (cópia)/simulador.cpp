@@ -8,11 +8,8 @@ using namespace std;
 
 int main() {
 
-        AplicacaoTransmissora();
-        return 0;
+        CamadaFisicaTrasnmissora();
 
-        //CamadaFisicaTrasnmissora();
-       //CamadaFisicaReceptoraDecodificacaoBinaria();
     return 0;
 
 }

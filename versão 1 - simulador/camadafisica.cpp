@@ -6,20 +6,107 @@
 #include <stdlib.h>
 #include <string.h>
 #include <math.h>
-#include "camadafisica.h"
+#include <cmath>
+#include <algorithm>
+//#include "camadafisica.h"
 
 using namespace std;
 
-void conversor_ascii_binario(){
-    char mensagem[55];
-    int i;
+void CamadaFisicaReceptoraDecodificacaoBinaria() {
+    // int quadro[] deve ser utilizado apenas para a camada de enlace.
+    // A decodificação binária deve receber o código binário e conseguir decodificar o binário em string
+
+    cout << "Decodificação: " << endl;
+    int codigo_binario;
+    string mensagem;
+    // Deve ser feita a decodificação de binário para decimal
+
+    int numero, digito;
+    int posicao = 0;
+    int resultado = 0;
+
+    int vetor[] = {1, 2, 4, 8, 16, 32, 64, 128, 256};
+    int tamanho_string;
+    cout << "Tamanho da string: \n";
+    cin >> tamanho_string;
+
+    int i, j;
 
 
+    for (j = 0; j < tamanho_string; j++){
+        cout << "Digite o código binário que foi obtido" << endl;
+        scanf("%d", &numero);
+        //cin >> codigo_binario;
+
+ }
+        while (numero > 0) {
+            digito = numero % 10;
+            if (digito == 1)
+                resultado = resultado + vetor[posicao];
+            posicao++;
+            numero = numero / 10;
+        }
+
+        // Agora, passando do decimal para string e mostrando para o usuário
+        // A leitura é permitida apenas por caracter
+
+        printf("O resultado em decimal eh : %d \n", resultado);
+        printf("O resultado em ANSII eh : %c\n", resultado);
+    }
+
+
+
+
+
+void CamadaDeAplicacaoReceptoraDecodificacaoManchester(){
+
+}
+
+void CamadaDeAplicacaoReceptoraDecodificacaoBipolar(){
+
+}
+
+void CamadaFisicaReceptora( int fluxoBrutoDeBitsPontoB){
+    int tipoDeCodificacao;
+
+    switch (tipoDeCodificacao) {
+        case 0: // codificação binária
+            CamadaFisicaReceptoraDecodificacaoBinaria();
+            break;
+        case 1: // codificação Manchester
+            CamadaDeAplicacaoReceptoraDecodificacaoManchester();
+            break;
+        case 2: // codificação bipolar
+            CamadaDeAplicacaoReceptoraDecodificacaoBipolar();
+            break;
+
+    }
+}
+
+
+
+void MeioDeComunicacao (){
+    // Nessa camada deve ocorrer a transmissão do fluxo de bits do ponto A para o ponto B
+    int fluxoBrutoDeBits;
+    int fluxoBrutoDeBitsPontoA;
+    int fluxoBrutoDeBitsPontoB;
+
+    fluxoBrutoDeBitsPontoA = fluxoBrutoDeBitsPontoB;
+
+    while (fluxoBrutoDeBitsPontoB != fluxoBrutoDeBitsPontoA){
+        fluxoBrutoDeBitsPontoB += fluxoBrutoDeBitsPontoA;
+    }
+
+    CamadaFisicaReceptora(fluxoBrutoDeBitsPontoB);
+}
+
+void  CamadaFisicaTrasnmissoraCodificacaoBinaria(){
+    // int quadro[] deve ser utilizado apenas para a camada de enlace.
+    string mensagem;
     cout << "Digite uma mensagem:" << endl;
     cin >> mensagem;
     cout << "A mensagem digitada em binário eh :\n";
-
-
+    int i;
     // Conversor para binário
     for (i =0; i < mensagem[i]!= '\0'; i++){
         int aux;
@@ -34,14 +121,11 @@ void conversor_ascii_binario(){
             }
 
         }
-
+        cout << " ";
     }
     cout << "\n";
-}
-void  CamadaFisicaTrasnmissoraCodificacaoBinaria(){
-    // int quadro[] deve ser utilizado apenas para a camada de enlace.
-    conversor_ascii_binario();
 
+    MeioDeComunicacao();
 }
 
 void CamadaDeAplicacaoTransmissoraCodificacaoManchester(){
@@ -51,6 +135,7 @@ void CamadaDeAplicacaoTransmissoraCodificacaoManchester(){
 void CamadaDeAplicacaoTransmissoraBipolar(){
     // int quadro[] deve ser utilizado apenas para a camada de enlace.
 }
+
 void CamadaFisicaTrasnmissora( ) {
     // int quadro[] deve ser utilizado apenas para a camada de enlace.
     //int quadro[];
@@ -83,5 +168,21 @@ void CamadaFisicaTrasnmissora( ) {
             break;
 
     }
+
+}
+
+
+void CamadaDeAplicacaoTransmissora(string mensagem){
+    // int quadro [] = mensagem -> usado apenas na camada de enlace
+
+    //chama a próxima camada
+    CamadaFisicaTrasnmissora();
+}
+
+
+void AplicacaoTransmissora(void){
+    string mensagem;
+    // chama a próxima camada
+    CamadaDeAplicacaoTransmissora(mensagem);
 
 }
