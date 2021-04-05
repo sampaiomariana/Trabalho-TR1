@@ -7,7 +7,16 @@
 #ifndef UNTITLED5_CAMADAFISICA_H
 #define UNTITLED5_CAMADAFISICA_H
 
-void conversor_ascii_binario();
+
+void CamadaFisicaReceptoraDecodificacaoBinaria();
+
+void CamadaDeAplicacaoReceptoraDecodificacaoManchester();
+
+void CamadaDeAplicacaoReceptoraDecodificacaoBipolar();
+
+void CamadaFisicaReceptora();
+
+void MeioDeComunicacao();
 
 void  CamadaFisicaTrasnmissoraCodificacaoBinaria();
 
@@ -16,6 +25,14 @@ void CamadaDeAplicacaoTransmissoraCodificacaoManchester();
 void CamadaDeAplicacaoTransmissoraBipolar();
 
 void CamadaFisicaTrasnmissora();
+
+void CamadaDeAplicacaoTransmissora();
+
+void AplicacaoTransmissora(void);
+
+void AplicacaoReceptora();
+
+void CamadaDeAplicacaoReceptora();
 
 
 #endif //UNTITLED5_CAMADAFISICA_H

@@ -8,7 +8,7 @@
 #include <math.h>
 #include <cmath>
 #include <algorithm>
-//#include "camadafisica.h"
+#include "camadafisica.h"
 
 using namespace std;
 
@@ -53,9 +53,6 @@ void CamadaFisicaReceptoraDecodificacaoBinaria() {
         printf("O resultado em decimal eh : %d \n", resultado);
         printf("O resultado em ANSII eh : %c\n", resultado);
     }
-
-
-
 
 
 void CamadaDeAplicacaoReceptoraDecodificacaoManchester(){
@@ -185,4 +182,13 @@ void AplicacaoTransmissora(void){
     // chama a próxima camada
     CamadaDeAplicacaoTransmissora(mensagem);
 
+}
+
+void AplicacaoReceptora(string mensagem){
+    cout << "A mensagem recebida foi:" << mensagem << endl;
+}
+
+void CamadaDeAplicacaoReceptora(){
+    string mensagem;
+    AplicacaoReceptora(mensagem);
 }
