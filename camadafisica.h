@@ -7,8 +7,7 @@
 #ifndef UNTITLED5_CAMADAFISICA_H
 #define UNTITLED5_CAMADAFISICA_H
 
-
-void CamadaFisicaReceptoraDecodificacaoBinaria();
+int CamadaFisicaReceptoraDecodificacaoBinaria();
 
 void CamadaDeAplicacaoReceptoraDecodificacaoManchester();
 
@@ -33,6 +32,8 @@ void AplicacaoTransmissora(void);
 void AplicacaoReceptora();
 
 void CamadaDeAplicacaoReceptora();
+
+int BitXor();
 
 
 #endif //UNTITLED5_CAMADAFISICA_H
