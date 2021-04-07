@@ -16,6 +16,7 @@ using namespace std;
 int CamadaFisicaReceptoraDecodificacaoBinaria() {
     // int quadro[] deve ser utilizado apenas para a camada de enlace.
     // A decodificação binária deve receber o código binário e conseguir decodificar o binário em string
+    // A função esta decodificando de binário para decimal e decimal para char seguindo a tabela ASCII
 
     cout << "Decodificação: " << endl;
 
@@ -50,7 +51,7 @@ int CamadaFisicaReceptoraDecodificacaoBinaria() {
 
         printf("O resultado em decimal eh : %d \n",resultado);
         printf("O resultado em ANSII eh : %c\n", resultado);
-        
+
 
     }
 
