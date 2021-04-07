@@ -221,10 +221,9 @@ void AplicacaoTransmissora(void){
 
 void AplicacaoReceptora(string mensagem){
 
-   
-    
-     mensagem = CamadaFisicaReceptoraDecodificacaoBinaria();
-     cout << "A mensagem recebida foi:"  << mensagem << endl;
+     // cout << "A mensagem recebida foi:\n";
+    mensagem = CamadaFisicaReceptoraDecodificacaoBinaria();
+     
     
 }
 
