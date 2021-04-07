@@ -27,19 +27,17 @@ int CamadaFisicaReceptoraDecodificacaoBinaria() {
 
     int vetor[] = {1, 2, 4, 8, 16, 32, 64, 128, 256};
     int tamanho_string;
-    cout << "Tamanho da string: \n";
-    cin >> tamanho_string;
+    
+    //cout << "Tamanho da string: \n";
+    //cin >> tamanho_string;
 
     int i, j;
 
-     for (j = 0; j < tamanho_string; j++){
-        cout << "Digite o código binário que foi obtido" << endl;
-        scanf("%d", &numero);
-        //cin >> codigo_binario;
-
-    }
-
-        while (numero > 0) {
+    
+    cout << "Digite o código binário que foi obtido  " << endl;
+    scanf("%d", &numero);
+       
+      while (numero > 0) {
             digito = numero % 10;
             if (digito == 1)
                 resultado = resultado + vetor[posicao];
@@ -47,12 +45,13 @@ int CamadaFisicaReceptoraDecodificacaoBinaria() {
             numero = numero / 10;
         }
 
-   
         // Agora, passando do decimal para string e mostrando para o usuário
         // A leitura é permitida apenas por caracter
 
-        printf("O resultado em decimal eh : %d \n", resultado);
+        printf("O resultado em decimal eh : %d \n",resultado);
         printf("O resultado em ANSII eh : %c\n", resultado);
+        
+
     }
 
 
@@ -220,7 +219,12 @@ void AplicacaoTransmissora(void){
 }
 
 void AplicacaoReceptora(string mensagem){
-    cout << "A mensagem recebida foi:" << mensagem << endl;
+
+   
+    
+     mensagem = CamadaFisicaReceptoraDecodificacaoBinaria();
+     cout << "A mensagem recebida foi:"  << mensagem << endl;
+    
 }
 
 int conversor_binario_string (){
