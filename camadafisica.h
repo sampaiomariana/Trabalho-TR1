@@ -9,9 +9,9 @@
 
 int CamadaFisicaReceptoraDecodificacaoBinaria();
 
-void CamadaDeAplicacaoReceptoraDecodificacaoManchester();
+int CamadaDeAplicacaoReceptoraDecodificacaoManchester();
 
-void CamadaDeAplicacaoReceptoraDecodificacaoBipolar();
+int CamadaDeAplicacaoReceptoraDecodificacaoBipolar();
 
 void CamadaFisicaReceptora();
 
@@ -33,7 +33,7 @@ void AplicacaoReceptora();
 
 void CamadaDeAplicacaoReceptora();
 
-int BitXor();
+
 
 
 #endif //UNTITLED5_CAMADAFISICA_H

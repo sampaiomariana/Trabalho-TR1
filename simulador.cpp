@@ -9,10 +9,7 @@ using namespace std;
 int main() {
 
         AplicacaoTransmissora();
-        return 0;
-
-        //CamadaFisicaTrasnmissora();
-       //CamadaFisicaReceptoraDecodificacaoBinaria();
-    return 0;
+       
+    	return 0;
 
 }

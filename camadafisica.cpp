@@ -55,28 +55,58 @@ int CamadaFisicaReceptoraDecodificacaoBinaria() {
 
     }
 
+int BitXnor (int a, int b) {
+      int resultante;
+      resultante = !(a^b);
+      return resultante;
+}
 
 
-void CamadaDeAplicacaoReceptoraDecodificacaoManchester(){
+int CamadaDeAplicacaoReceptoraDecodificacaoManchester(){
+
+    int* manchester;
+    int size_manchester;
+
+    int quadro[size_manchester/2];
+
+    int i;
+
+    for (i = 0; i <size_manchester/2; i++){
+        quadro[i] = BitXnor(manchester[2*i], 0);
+    }
+
+    cout << endl;
+
+     for (i = 0; i < size_manchester/2; i++){
+        cout << quadro[i];
+     }
+   
+    cout << "A mensagem decofificada eh: \n" << quadro[i] << endl;
+
+    cout << endl;
+
 
 }
 
-void CamadaDeAplicacaoReceptoraDecodificacaoBipolar(){
+int CamadaDeAplicacaoReceptoraDecodificacaoBipolar(){
 
 }
 
-void CamadaFisicaReceptora( int fluxoBrutoDeBitsPontoB){
+void CamadaFisicaReceptora(){
+    int size;
+    int quadro [size];
+    int fluxoBrutoDeBits;
     int tipoDeCodificacao;
 
     switch (tipoDeCodificacao) {
         case 0: // codificação binária
-            CamadaFisicaReceptoraDecodificacaoBinaria();
+           fluxoBrutoDeBits = CamadaFisicaReceptoraDecodificacaoBinaria();
             break;
         case 1: // codificação Manchester
-            CamadaDeAplicacaoReceptoraDecodificacaoManchester();
+            fluxoBrutoDeBits = CamadaDeAplicacaoReceptoraDecodificacaoManchester();
             break;
         case 2: // codificação bipolar
-            CamadaDeAplicacaoReceptoraDecodificacaoBipolar();
+            fluxoBrutoDeBits =CamadaDeAplicacaoReceptoraDecodificacaoBipolar();
             break;
 
     }
@@ -88,18 +118,46 @@ void CamadaFisicaReceptora( int fluxoBrutoDeBitsPontoB){
 
 void MeioDeComunicacao (){
     // Nessa camada deve ocorrer a transmissão do fluxo de bits do ponto A para o ponto B
-    // Considerando tamanho máximo do fluxo de bits de 100
-    int fluxoBrutoDeBits;
-    int fluxoBrutoDeBitsPontoA[100];
-    int fluxoBrutoDeBitsPontoB[100];
+    // Considerando tamanho máximo do fluxo de bits como size
+    
+    
+    int size;
+    int tipoDeCodificacao;
 
-    fluxoBrutoDeBitsPontoA[100] = fluxoBrutoDeBitsPontoB[100];
+    int fluxoBrutoDeBits[size];
+    int fluxoBrutoDeBitsPontoA[size];
+    int fluxoBrutoDeBitsPontoB[size];
+    int i;
 
-    while (fluxoBrutoDeBitsPontoB[100] != fluxoBrutoDeBitsPontoA[100]){
-        fluxoBrutoDeBitsPontoB[100] += fluxoBrutoDeBitsPontoA[100];
+    cout << "Fluxo de bits de A eh: \n";
+    for (i = 0; i < size; i++){
+        fluxoBrutoDeBitsPontoA[i] = fluxoBrutoDeBitsPontoB[i];
+        cout << fluxoBrutoDeBitsPontoA[i];
+    }
+    cout << endl;
+
+    cout << "O fluxo de bits em B eh: \n";
+    for (i = 0; i < size; i++){
+        fluxoBrutoDeBitsPontoB[i] =  fluxoBrutoDeBitsPontoA[i];
+        cout << fluxoBrutoDeBitsPontoB[i];
+        // Os bits sendo transferidos do Ponto A para o ponto B
     }
 
-    CamadaFisicaReceptora(fluxoBrutoDeBitsPontoB[100]);
+    cout << endl;
+    // realizar a chamada da próxima camada
+    CamadaFisicaReceptora();
+
+     /*   switch (tipoDeCodificacao){
+        case 0:
+        CamadaFisicaReceptora(size, tipoDeCodificacao);
+        break;
+        case 1:
+        CamadaFisicaReceptora(size, tipoDeCodificacao);
+        break;
+        case 2:
+        CamadaFisicaReceptora(size, tipoDeCodificacao);
+        break;
+    }*/
 }
 
 void  CamadaFisicaTrasnmissoraCodificacaoBinaria(){
@@ -130,39 +188,39 @@ void  CamadaFisicaTrasnmissoraCodificacaoBinaria(){
     MeioDeComunicacao();
 }
 
-int BitXor (int n, int m){
-    return !(n ^ m);
-}
+
 
 void CamadaDeAplicacaoTransmissoraCodificacaoManchester(){
     // int quadro[] deve ser utilizado apenas para a camada de enlace.
     // Codificação Manchester 
+   
 
     int i;
-    int tamanho_bit;
     int* quadro;
+    int size;
 
+    int manchester[2*size];
+    
     string mensagem;
-    cout << "Digite o fluxo de bits :" << endl;
+    cout << "Digite uma mensagem:" << endl;
     cin >> mensagem;
 
-
-    int codificacao_machester[2*tamanho_bit];
-
-    for (i = 0; i < tamanho_bit;i++){
-        codificacao_machester[2*i] = BitXor(0, quadro[i]);;
-        codificacao_machester[2*i + 1] = BitXor(1, quadro[i]);
+     // Passegm de clock considerando que ele comece em zero
+    for (i = 0; i < size; i++){
+        manchester[2*i] = BitXnor (0,quadro[i]);
+        manchester[2* i +1] = BitXnor(1,quadro[i]);
     }
 
-    cout << "O fluxo de Bits na codificação Manchester eh: " << endl;
-
-    for ( i = 0; i < 2*tamanho_bit; ++i)
-    {
-        cout << "codificação: " << codificacao_machester[i];
+    // size foi definido como um inteiro mas sem nenhum valor especifico 
+    
+   for (i = 0; i < 2*size; i++){
+        //cout << manchester[i];
+        
     }
+    cout << "A mensagem com a Codificação Manchester eh :\n" << manchester[i] << endl;   
     cout << endl;
-
-   // MeioDeComunicacao();
+   
+     MeioDeComunicacao();
 }
 
 void CamadaDeAplicacaoTransmissoraBipolar(){
@@ -219,11 +277,19 @@ void AplicacaoTransmissora(void){
 
 }
 
-void AplicacaoReceptora(string mensagem){
-
+void AplicacaoReceptora(){
+    int tipoDeCodificacao;
      // cout << "A mensagem recebida foi:\n";
-    mensagem = CamadaFisicaReceptoraDecodificacaoBinaria();
-     
+    switch(tipoDeCodificacao){
+         case 0: 
+          CamadaFisicaReceptoraDecodificacaoBinaria();
+         break;
+         case 1:
+          CamadaDeAplicacaoReceptoraDecodificacaoManchester();   
+         break;  
+    }
+   
+    
     
 }
 
@@ -258,9 +324,9 @@ int conversor_binario_string (){
 
 void CamadaDeAplicacaoReceptora(){
     int fluxoBrutoDeBits;
-    
+   
     //string mensagem = conversor_binario_string;
     string mensagem;
     // chama a proxima camada
-    AplicacaoReceptora(mensagem);
+    AplicacaoReceptora();
 }
