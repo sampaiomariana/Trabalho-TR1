@@ -29,12 +29,12 @@ int CamadaFisicaReceptoraDecodificacaoBinaria() {
     int vetor[] = {1, 2, 4, 8, 16, 32, 64, 128, 256};
     int tamanho_string;
     
-    //cout << "Tamanho da string: \n";
-    //cin >> tamanho_string;
+    cout << "Tamanho da string: \n";
+    cin >> tamanho_string;
 
     int i, j;
 
-    
+    for (i = 0; i < tamanho_string; i++){
     cout << "Digite o código binário que foi obtido  " << endl;
     scanf("%d", &numero);
        
@@ -44,16 +44,16 @@ int CamadaFisicaReceptoraDecodificacaoBinaria() {
                 resultado = resultado + vetor[posicao];
             posicao++;
             numero = numero / 10;
-        }
-
-        // Agora, passando do decimal para string e mostrando para o usuário
+            }        
+    
+      // Agora, passando do decimal para string e mostrando para o usuário
         // A leitura é permitida apenas por caracter
 
         printf("O resultado em decimal eh : %d \n",resultado);
-        printf("O resultado em ANSII eh : %c\n", resultado);
+        printf("O resultado em ANSII eh : %c\n", char (resultado));
+}
 
-
-    }
+}
 
 int BitXnor (int a, int b) {
       int resultante;
@@ -66,11 +66,17 @@ int CamadaDeAplicacaoReceptoraDecodificacaoManchester(){
 
     int* manchester;
     int size_manchester;
+    int size;
 
     int quadro[size_manchester/2];
 
     int i;
 
+    string mensagem;
+    cout << "Digite uma mensagem:" << endl;
+    cin >> mensagem;
+
+    // Passegm de clock considerando que ele comece em zero
     for (i = 0; i <size_manchester/2; i++){
         quadro[i] = BitXnor(manchester[2*i], 0);
     }
@@ -93,25 +99,36 @@ int CamadaDeAplicacaoReceptoraDecodificacaoBipolar(){
 }
 
 void CamadaFisicaReceptora(){
-    int size;
-    int quadro [size];
+    //int size;
+    //int quadro [size];
     int fluxoBrutoDeBits;
-    int tipoDeCodificacao;
+    //int tipoDeDeCodificacao;
+    int tipoDeDeCodificacao;
 
-    switch (tipoDeCodificacao) {
+    cout << "\nDigite qual a decodificação você escolhe:\n 0 - Binária \n 1 - Manchester\n 2 - Bipolar\n";
+    cin >> tipoDeDeCodificacao;
+
+   /* while (tipoDeDeCodificacao != 0 && tipoDeDeCodificacao != 1 && tipoDeDeCodificacao != 2) {
+        cout << "Selecione uma opção válida." << endl;
+        cout << "\nDigite qual a codificação você escolhe:\n 0 - Binária \n 1 - Manchester\n 2 - Bipolar\n";
+        cin >> tipoDeDeCodificacao;
+    }*/
+    
+
+    switch (tipoDeDeCodificacao) {
         case 0: // codificação binária
-           fluxoBrutoDeBits = CamadaFisicaReceptoraDecodificacaoBinaria();
+          CamadaFisicaReceptoraDecodificacaoBinaria();
             break;
         case 1: // codificação Manchester
-            fluxoBrutoDeBits = CamadaDeAplicacaoReceptoraDecodificacaoManchester();
+           CamadaDeAplicacaoReceptoraDecodificacaoManchester();
             break;
         case 2: // codificação bipolar
-            fluxoBrutoDeBits =CamadaDeAplicacaoReceptoraDecodificacaoBipolar();
+            CamadaDeAplicacaoReceptoraDecodificacaoBipolar();
             break;
 
     }
 
-    CamadaDeAplicacaoReceptora();
+   // CamadaDeAplicacaoReceptora();
 }
 
 
@@ -145,17 +162,21 @@ void MeioDeComunicacao (){
 
     cout << endl;
     // realizar a chamada da próxima camada
+   
+    
     CamadaFisicaReceptora();
 
-     /*   switch (tipoDeCodificacao){
+   /* int tipoDeDeCodificacao;
+
+        switch (tipoDeDeCodificacao){
         case 0:
-        CamadaFisicaReceptora(size, tipoDeCodificacao);
+        CamadaFisicaReceptora();
         break;
         case 1:
-        CamadaFisicaReceptora(size, tipoDeCodificacao);
+        CamadaFisicaReceptora();
         break;
         case 2:
-        CamadaFisicaReceptora(size, tipoDeCodificacao);
+        CamadaFisicaReceptora();
         break;
     }*/
 }
@@ -219,7 +240,7 @@ void CamadaDeAplicacaoTransmissoraCodificacaoManchester(){
     }
     cout << "A mensagem com a Codificação Manchester eh :\n" << manchester[i] << endl;   
     cout << endl;
-   
+
      MeioDeComunicacao();
 }
 
@@ -227,7 +248,7 @@ void CamadaDeAplicacaoTransmissoraBipolar(){
     // int quadro[] deve ser utilizado apenas para a camada de enlace.
 }
 
-void CamadaFisicaTrasnmissora( ) {
+void CamadaFisicaTrasnmissora( int quadro) {
     // int quadro[] deve ser utilizado apenas para a camada de enlace.
     int tipoDeCodificacao;  // alterar de acordo com o teste
     int fluxoBrutoDeBits; // fluxoBrutodeBits[]
@@ -259,19 +280,20 @@ void CamadaFisicaTrasnmissora( ) {
 
     }
 
+   // MeioDeComunicacao();
 }
 
 
-void CamadaDeAplicacaoTransmissora(string mensagem){
+void CamadaDeAplicacaoTransmissora(int mensagem){
     // int quadro [] = mensagem -> usado apenas na camada de enlace
-
+     int quadro =  mensagem;
     //chama a próxima camada
-    CamadaFisicaTrasnmissora();
+    CamadaFisicaTrasnmissora(quadro);
 }
 
 
 void AplicacaoTransmissora(void){
-    string mensagem;
+   int mensagem;
     // chama a próxima camada
     CamadaDeAplicacaoTransmissora(mensagem);
 
@@ -279,6 +301,15 @@ void AplicacaoTransmissora(void){
 
 void AplicacaoReceptora(){
     int tipoDeCodificacao;
+
+    cout << "Tipo de Decodificação" << endl;
+    cin >> tipoDeCodificacao;
+
+    while (tipoDeCodificacao != 0 && tipoDeCodificacao != 1 && tipoDeCodificacao != 2) {
+        cout << "Selecione uma opção válida." << endl;
+        cout << "\nDigite qual a codificação você escolhe:\n 0 - Binária \n 1 - Manchester\n 2 - Bipolar\n";
+        cin >> tipoDeCodificacao;
+    }
      // cout << "A mensagem recebida foi:\n";
     switch(tipoDeCodificacao){
          case 0: 
@@ -289,8 +320,6 @@ void AplicacaoReceptora(){
          break;  
     }
    
-    
-    
 }
 
 int conversor_binario_string (){
