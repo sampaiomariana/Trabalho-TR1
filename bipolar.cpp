@@ -8,6 +8,7 @@
 #include <algorithm>
 #include "camadafisica.h"
 
+#define TAMANHO_VETOR 7
 using namespace std;
 
 
@@ -42,37 +43,80 @@ void  CamadaFisicaTrasnmissoraCodificacaoBinaria(){
 void CamadaDeAplicacaoTransmissoraBipolar(){
 
 	// Deve ser feita a conversão para binário
-	CamadaFisicaTrasnmissoraCodificacaoBinaria();
-	string mensagem;
-	int i = mensagem.size();
-	int flag = 0;
-	cout << "A mensagem codificada eh:";
-	for (int j = 0; j < mensagem[i]; j++){
-		if(mensagem[i] == '0'){
-			cout << '0';
-
-		} else if (mensagem[i] == '1'){
-			
-			if (flag == 0){
-				flag = 1;
-				cout << '1';
-			} else {
-				flag = 0;
-				cout << '1';
-			}
-
-			}
-	}
-
+	//CamadaFisicaTrasnmissoraCodificacaoBinaria();
+	 // A mensagem é codificada por desnível entre 0 e 1
+    // 0 -> 0 = 0
+    // 0 -> 1 = 1
+    // 1 -> 1 = -1
 	
-	cout << "\n";
+	string mensagem;
+
+	cout << "Digite uma mensagem em binário:" << endl;
+    cin >> mensagem;
+   
+
+    cout << "A mensagem digitada em bipolar eh :\n";
+    int i;
+    int nivelnegativo = -1;
+    int aux;
+    int nivelneutro = 0;
+    int nivelpositivo = 1;
+
+    for (i = 0; i < TAMANHO_VETOR; i++)
+
+    		if (mensagem[i] > mensagem[nivelneutro]){
+    			nivelneutro = nivelpositivo;
+    			cout << " ";	
+    			cout << "1";
+
+    			
+    		} else if (mensagem[i] = mensagem[i]){
+
+    			nivelneutro = nivelnegativo;
+    			mensagem[i] >= (1 << i);
+    			mensagem[i] = mensagem[i] - (1 << i);
+    			cout << " ";	
+    			cout << "0";
+
+    			} if (mensagem[i] = mensagem[nivelpositivo]){
+
+    				nivelnegativo = nivelneutro;
+    				cout << " ";
+    				cout << "-1";
+    			}
+
+
+    		cout << "\n";   
+
+
+
+		/*for (i = 0; i < mensagem[i]!= '\0'; i++){
+        int aux;
+        aux = mensagem[i];
+        int j;
+        for (j = 7; j + 1 > 0; j--){
+            if (aux >= (1 << j)){
+                aux = aux - ( 1 << j);
+                cout << "0";
+            } else {
+                cout << "1";
+            }
+
+        }
+        cout << " ";
+    }
+    cout << "\n";*/
+
 
 }
 
 
 
-int main (){
 
+
+
+int main (){
+	//CamadaFisicaTrasnmissoraCodificacaoBinaria();
 	CamadaDeAplicacaoTransmissoraBipolar();
 
 }
