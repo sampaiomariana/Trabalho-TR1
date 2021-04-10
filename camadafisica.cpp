@@ -46,7 +46,7 @@ int CamadaFisicaReceptoraDecodificacaoBinaria() {
             numero = numero / 10;
             }        
     
-      // Agora, passando do decimal para string e mostrando para o usuário
+        // Agora, passando do decimal para string e mostrando para o usuário
         // A leitura é permitida apenas por caracter
 
         printf("O resultado em decimal eh : %d \n",resultado);
@@ -90,13 +90,10 @@ int CamadaDeAplicacaoReceptoraDecodificacaoManchester(){
     cout << "A mensagem decofificada eh: \n" << quadro[i] << endl;
 
     cout << endl;
-
-
 }
 
 int CamadaDeAplicacaoReceptoraDecodificacaoBipolar(){
 
-    
     // 0 -> 0 = 0
     // 0 -> 1 = 1
     // 1 -> 1 = -1/0
@@ -151,26 +148,16 @@ int CamadaDeAplicacaoReceptoraDecodificacaoBipolar(){
             
 
      cout << "\nO valor tamanho da mensagem eh: " << mensagem.size() << endl;
-
-
     
 }
 
 void CamadaFisicaReceptora(){
-    //int size;
-    //int quadro [size];
+   
     int fluxoBrutoDeBits;
-    //int tipoDeDeCodificacao;
     int tipoDeDeCodificacao;
 
     cout << "\nDigite qual a decodificação você escolhe:\n 0 - Binária \n 1 - Manchester\n 2 - Bipolar\n";
     cin >> tipoDeDeCodificacao;
-
-   /* while (tipoDeDeCodificacao != 0 && tipoDeDeCodificacao != 1 && tipoDeDeCodificacao != 2) {
-        cout << "Selecione uma opção válida." << endl;
-        cout << "\nDigite qual a codificação você escolhe:\n 0 - Binária \n 1 - Manchester\n 2 - Bipolar\n";
-        cin >> tipoDeDeCodificacao;
-    }*/
     
 
     switch (tipoDeDeCodificacao) {
@@ -217,8 +204,8 @@ void MeioDeComunicacao (){
     }
 
     cout << endl;
+    
     // realizar a chamada da próxima camada
-   
     CamadaFisicaReceptora();
 
 }
@@ -251,13 +238,10 @@ void  CamadaFisicaTrasnmissoraCodificacaoBinaria(){
     MeioDeComunicacao();
 }
 
-
-
 void CamadaDeAplicacaoTransmissoraCodificacaoManchester(){
     // int quadro[] deve ser utilizado apenas para a camada de enlace.
     // Codificação Manchester 
    
-
     int i;
     int* quadro;
     int size;
@@ -347,12 +331,8 @@ void CamadaDeAplicacaoTransmissoraCodificacaoBipolar(){
 void CamadaFisicaTrasnmissora( int quadro) {
     // int quadro[] deve ser utilizado apenas para a camada de enlace.
     int tipoDeCodificacao;  // alterar de acordo com o teste
-    int fluxoBrutoDeBits; // fluxoBrutodeBits[]
+    int fluxoBrutoDeBits; 
     int size;
-
-    // Definindo um tamanho para o quadro
-
-    //cout << "\nDefinindo o tamanho do quadro que será recebido: \n" << size <<endl;
 
     cout << "\nDigite qual a codificação você escolhe:\n 0 - Binária \n 1 - Manchester\n 2 - Bipolar\n";
     cin >> tipoDeCodificacao;
@@ -375,8 +355,6 @@ void CamadaFisicaTrasnmissora( int quadro) {
             break;
 
     }
-
-   // MeioDeComunicacao();
 }
 
 
@@ -386,7 +364,6 @@ void CamadaDeAplicacaoTransmissora(int mensagem){
     //chama a próxima camada
     CamadaFisicaTrasnmissora(quadro);
 }
-
 
 void AplicacaoTransmissora(void){
    int mensagem;
