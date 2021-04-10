@@ -6,117 +6,138 @@
 #include <cmath>
 #include <string>
 #include <algorithm>
-#include "camadafisica.h"
+//#include "camadafisica.h"
 
-#define TAMANHO_VETOR 7
+#define TAMANHO_VETOR 8
 using namespace std;
 
-
-void  CamadaFisicaTrasnmissoraCodificacaoBinaria(){
-    // int quadro[] deve ser utilizado apenas para a camada de enlace.
-    string mensagem;
-    cout << "Digite uma mensagem:" << endl;
-    cin >> mensagem;
-    cout << "A mensagem digitada em binário eh :\n";
-    int i;
-    // Conversor para binário
-    for (i =0; i < mensagem[i]!= '\0'; i++){
-        int aux;
-        aux = mensagem[i];
-        int j;
-        for (j = 7; j + 1 > 0; j--){
-            if (aux >=(1<< j)){
-                aux = aux - (1 << j);
-                cout << "1";
-            } else {
-                cout << "0";
-            }
-
-        }
-        cout << " ";
-    }
-    cout << "\n";
-}
-
-
-
-void CamadaDeAplicacaoTransmissoraBipolar(){
+int CamadaDeAplicacaoTransmissoraBipolar(){
 
 	// Deve ser feita a conversão para binário
 	//CamadaFisicaTrasnmissoraCodificacaoBinaria();
 	 // A mensagem é codificada por desnível entre 0 e 1
     // 0 -> 0 = 0
     // 0 -> 1 = 1
-    // 1 -> 1 = -1
+    // 1 -> 1 = -1/0
 	
-	string mensagem;
+    string mensagem;
 
-	cout << "Digite uma mensagem em binário:" << endl;
+	cout << "Digite uma mensagem:" << endl;
     cin >> mensagem;
    
 
-    cout << "A mensagem digitada em bipolar eh :\n";
+    cout << "A mensagem digitada em bipolar eh :";
     int i;
     int nivelnegativo = -1;
-    int aux;
+    int aux0, aux1,aux2;
     int nivelneutro = 0;
     int nivelpositivo = 1;
 
-    for (i = 0; i < TAMANHO_VETOR; i++)
-
-    		if (mensagem[i] > mensagem[nivelneutro]){
-    			nivelneutro = nivelpositivo;
-    			cout << " ";	
-    			cout << "1";
-
-    			
-    		} else if (mensagem[i] = mensagem[i]){
-
-    			nivelneutro = nivelnegativo;
-    			mensagem[i] >= (1 << i);
-    			mensagem[i] = mensagem[i] - (1 << i);
-    			cout << " ";	
-    			cout << "0";
-
-    			} if (mensagem[i] = mensagem[nivelpositivo]){
-
-    				nivelnegativo = nivelneutro;
-    				cout << " ";
-    				cout << "-1";
-    			}
-
-
-    		cout << "\n";   
-
-
-
-		/*for (i = 0; i < mensagem[i]!= '\0'; i++){
-        int aux;
-        aux = mensagem[i];
-        int j;
-        for (j = 7; j + 1 > 0; j--){
-            if (aux >= (1 << j)){
-                aux = aux - ( 1 << j);
-                cout << "0";
-            } else {
+            
+            /*for (i =0; i < mensagem.length(); i++){
+               // mensagem[i] = 0;
+            }*/
+            //for (i = 0; i < mensagem.length(); i++)
+            //mensagem[i] > mensagem[nivelneutro]
+            if (mensagem[i] > mensagem[nivelneutro]){
+                nivelneutro = nivelpositivo;
+               // cout << " ";    
                 cout << "1";
-            }
+                nivelneutro = 1;
+                
+              //else if (mensagem[i] == mensagem[i] || mensagem[i] == 0 || mensagem[i] == 1)  
+            } else if ( mensagem[i] == mensagem[i]){
 
-        }
-        cout << " ";
-    }
-    cout << "\n";*/
+                 nivelneutro = nivelnegativo;
+                 mensagem[i] >= (1 << i);
+                 mensagem[i] = mensagem[i] - (1 << i);
+                //cout << " ";    
+                cout << "0";
+                nivelneutro = 0;
+                
+                //mensagem[i] ==  mensagem[i]  && mensagem[i] == 1
+                } 
+            if (mensagem[i] ==  mensagem[i]  && mensagem[i] == 1 ){
 
+                    //nivelnegativo  = nivelneutro;
+                    cout << " ";
+                    cout << "-1";
 
+                }
+            
+                cout << " ";
+                cout << "\n";
+            
+
+     cout << "\nO valor tamanho da mensagem eh: " << mensagem.size() << endl;
 }
 
+int CamadaDeAplicacaoReceptoraDecodificacaoBipolar(){
 
+    // 0 -> 0 = 0
+    // 0 -> 1 = 1
+    // 1 -> 1 = -1/0
+    
+    string mensagem;
 
+    cout << "Digite uma mensagem:" << endl;
+    cin >> mensagem;
 
+    int i;
+    int nivelnegativo = -1;
+    int aux0, aux1,aux2;
+    int nivelneutro = 0;
+    int nivelpositivo = 1;
+
+    // Inicializar 
+    for (i = 0; i < mensagem.length(); i++){
+        mensagem[i] = 0;
+        mensagem[i+1] = 1;
+    }
+
+    cout << "A mensagem decodifica eh: ";
+
+    if (mensagem[i] < mensagem[nivelneutro]){
+                nivelneutro = nivelpositivo;
+               // cout << " ";    
+                cout << "0";
+                nivelneutro = 1;
+                
+              //else if (mensagem[i] == mensagem[i] || mensagem[i] == 0 || mensagem[i] == 1)  
+            } else if ( mensagem[i] != mensagem[i]){
+
+                 nivelneutro = nivelnegativo;
+                 mensagem[i] >= (1 << i);
+                 mensagem[i] = mensagem[i] - (1 << i);
+                //cout << " ";    
+                cout << "1";
+                nivelneutro = 0;
+                
+                //mensagem[i] ==  mensagem[i]  && mensagem[i] == 1
+                } 
+            if (mensagem[i] ==  mensagem[i]  && mensagem[i] == 1 ){
+
+                    //nivelnegativo  = nivelneutro;
+                    cout << " ";
+                    cout << "1";
+
+                }
+            
+                cout << " ";
+                cout << "\n";
+            
+
+     cout << "\nO valor tamanho da mensagem eh: " << mensagem.size() << endl;
+
+    
+}
 
 
 int main (){
-	//CamadaFisicaTrasnmissoraCodificacaoBinaria();
-	CamadaDeAplicacaoTransmissoraBipolar();
+	 //CamadaFisicaTrasnmissoraCodificacaoBinaria();
+	 CamadaDeAplicacaoTransmissoraBipolar();
+     CamadaDeAplicacaoReceptoraDecodificacaoBipolar();
 
+    
 }
+

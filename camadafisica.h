@@ -21,7 +21,7 @@ void  CamadaFisicaTrasnmissoraCodificacaoBinaria();
 
 void CamadaDeAplicacaoTransmissoraCodificacaoManchester();
 
-void CamadaDeAplicacaoTransmissoraBipolar();
+void CamadaDeAplicacaoTransmissoraCodificacaoBipolar();
 
 void CamadaFisicaTrasnmissora();
 

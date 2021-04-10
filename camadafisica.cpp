@@ -96,6 +96,64 @@ int CamadaDeAplicacaoReceptoraDecodificacaoManchester(){
 
 int CamadaDeAplicacaoReceptoraDecodificacaoBipolar(){
 
+    
+    // 0 -> 0 = 0
+    // 0 -> 1 = 1
+    // 1 -> 1 = -1/0
+    
+    string mensagem;
+
+    cout << "Digite uma mensagem:" << endl;
+    cin >> mensagem;
+
+    int i;
+    int nivelnegativo = -1;
+    int aux0, aux1,aux2;
+    int nivelneutro = 0;
+    int nivelpositivo = 1;
+
+    // Inicializar 
+    for (i = 0; i < mensagem.length(); i++){
+        mensagem[i] = 0;
+        mensagem[i+1] = 1;
+    }
+
+    cout << "A mensagem decodifica eh: ";
+
+    if (mensagem[i] < mensagem[nivelneutro]){
+                nivelneutro = nivelpositivo;
+               // cout << " ";    
+                cout << "0";
+                nivelneutro = 1;
+                
+              //else if (mensagem[i] == mensagem[i] || mensagem[i] == 0 || mensagem[i] == 1)  
+            } else if ( mensagem[i] != mensagem[i]){
+
+                 nivelneutro = nivelnegativo;
+                 mensagem[i] >= (1 << i);
+                 mensagem[i] = mensagem[i] - (1 << i);
+                //cout << " ";    
+                cout << "1";
+                nivelneutro = 0;
+                
+                //mensagem[i] ==  mensagem[i]  && mensagem[i] == 1
+                } 
+            if (mensagem[i] ==  mensagem[i]  && mensagem[i] == 1 ){
+
+                    //nivelnegativo  = nivelneutro;
+                    cout << " ";
+                    cout << "1";
+
+                }
+            
+                cout << " ";
+                cout << "\n";
+            
+
+     cout << "\nO valor tamanho da mensagem eh: " << mensagem.size() << endl;
+
+
+    
 }
 
 void CamadaFisicaReceptora(){
@@ -136,8 +194,6 @@ void CamadaFisicaReceptora(){
 void MeioDeComunicacao (){
     // Nessa camada deve ocorrer a transmissão do fluxo de bits do ponto A para o ponto B
     // Considerando tamanho máximo do fluxo de bits como size
-    
-    
     int size;
     int tipoDeCodificacao;
 
@@ -163,22 +219,8 @@ void MeioDeComunicacao (){
     cout << endl;
     // realizar a chamada da próxima camada
    
-    
     CamadaFisicaReceptora();
 
-   /* int tipoDeDeCodificacao;
-
-        switch (tipoDeDeCodificacao){
-        case 0:
-        CamadaFisicaReceptora();
-        break;
-        case 1:
-        CamadaFisicaReceptora();
-        break;
-        case 2:
-        CamadaFisicaReceptora();
-        break;
-    }*/
 }
 
 void  CamadaFisicaTrasnmissoraCodificacaoBinaria(){
@@ -243,9 +285,63 @@ void CamadaDeAplicacaoTransmissoraCodificacaoManchester(){
 
      MeioDeComunicacao();
 }
-
-void CamadaDeAplicacaoTransmissoraBipolar(){
+void CamadaDeAplicacaoTransmissoraCodificacaoBipolar(){
     // int quadro[] deve ser utilizado apenas para a camada de enlace.
+    // A mensagem é codificada por desnível entre 0 e 1
+    // 0 -> 0 = 0
+    // 0 -> 1 = 1
+    // 1 -> 1 = -1/0
+    
+    string mensagem;
+
+    cout << "Digite uma mensagem:" << endl;
+    cin >> mensagem;
+   
+
+    cout << "A mensagem digitada em bipolar eh :";
+    int i;
+    int nivelnegativo = -1;
+    int nivelneutro = 0;
+    int nivelpositivo = 1;
+
+                       
+            for (i = 0; i < mensagem.length(); i++)
+            //mensagem[i] > mensagem[nivelneutro]
+            if (mensagem[i] > mensagem[nivelneutro]){
+                nivelneutro = nivelpositivo;
+               // cout << " ";    
+                cout << "1";
+                nivelneutro = 1;
+                
+              //else if (mensagem[i] == mensagem[i] || mensagem[i] == 0 || mensagem[i] == 1)  
+            } else if ( mensagem[i] == mensagem[i] || mensagem[i] == 0 || mensagem[i] == 1){
+
+                 nivelneutro = nivelnegativo;
+                 mensagem[i] >= (1 << i);
+                 mensagem[i] = mensagem[i] - (1 << i);
+                //cout << " ";    
+                cout << "0";
+                nivelneutro = 0;
+                
+                //mensagem[i] ==  mensagem[i]  && mensagem[i] == 1
+                } 
+            if (mensagem[i] ==  mensagem[i]  && mensagem[i] == 1 ){
+
+                    //nivelnegativo  = nivelneutro;
+                    cout << " ";
+                    cout << "-1";
+
+                }
+
+            
+                cout << " ";
+                cout << "\n";
+            
+
+     cout << "\nO valor tamanho da mensagem eh: " << mensagem.size() << endl;
+    
+     MeioDeComunicacao();
+
 }
 
 void CamadaFisicaTrasnmissora( int quadro) {
@@ -275,7 +371,7 @@ void CamadaFisicaTrasnmissora( int quadro) {
             CamadaDeAplicacaoTransmissoraCodificacaoManchester();
             break;
         case 2: // codificação bipolar
-            CamadaDeAplicacaoTransmissoraBipolar();
+            CamadaDeAplicacaoTransmissoraCodificacaoBipolar();
             break;
 
     }
@@ -318,44 +414,15 @@ void AplicacaoReceptora(){
          case 1:
           CamadaDeAplicacaoReceptoraDecodificacaoManchester();   
          break;  
+         case 2:
+         CamadaDeAplicacaoReceptoraDecodificacaoBipolar();
     }
    
 }
 
-int conversor_binario_string (){
-    char numero;
-    int  binario = 0;
-
-    do {
-        cout << "Digite o número decimal que foi recebido";
-        cin >> numero;
-
-        if (numero == '0'){
-            binario = binario *2;
-        }
-
-        else if (numero == '1'){
-            binario = binario * 2 +1; 
-        }
-
-        else{
-            cout << "\n";
-        } 
-        } while (numero == '0' || numero == '1');
-
-         cout << "O valor recebido em decimal eh: " << binario << endl;
-         cout << "O caracter recebido eh " << char(binario) << endl;
-
-         return 0;
-
-}
-
-
 void CamadaDeAplicacaoReceptora(){
-    int fluxoBrutoDeBits;
-   
-    //string mensagem = conversor_binario_string;
-    string mensagem;
+       int fluxoBrutoDeBits;
+       string mensagem;
     // chama a proxima camada
     AplicacaoReceptora();
 }
