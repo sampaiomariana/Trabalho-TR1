@@ -1,15 +1,22 @@
 #include <iostream>
-#include <valarray>
 #include <stdio.h>
-#include "camadafisica.cpp"
+#include <string>
+#include <stdlib.h>
+#include "camadafisica.h"
+#include "camadaenlace.h"
 
 using namespace std;
 
 
+
 int main() {
 		// Realiza a chamada para o simulador
-        AplicacaoTransmissora();
-       
-    	return 0;
+        //AplicacaoTransmissora();
 
+		int quadro;
+
+        CamadaEnlaceDadosTransmissoraEnquadramento(quadro);
+       
+    	
+        return 0;
 }
