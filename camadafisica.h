@@ -34,6 +34,4 @@ void AplicacaoReceptora();
 void CamadaDeAplicacaoReceptora();
 
 
-
-
 #endif //UNTITLED5_CAMADAFISICA_H
