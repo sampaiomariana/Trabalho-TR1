@@ -3,13 +3,11 @@
 #define UNTITLED5_CAMADAENLACE_H
 
 
-void CamadaDeEnlaceTransmissoraEnquadramentoContagemDeCaracteres( int quadro);
+void CamadaDeEnlaceTransmissoraEnquadramentoContagemDeCaracteres(int quadro[]);
 
-void CamadaDeEnlaceTransmissoraEnquadramentoInsercaoDeBytes(int quadro);
+void CamadaEnlaceDadosTransmissora (int quadro[]);
 
-void CamadaEnlaceDadosTransmissoraEnquadramento(int quadro);
-
-int CamadaEnlaceDadosTransmissora (int quadro);
+void CamadaEnlaceDadosTransmissoraEnquadramento(int quadro[]);
 
 
 #endif //UNTITLED5_CAMADAENLACE_H

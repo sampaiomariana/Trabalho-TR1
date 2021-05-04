@@ -329,7 +329,7 @@ void CamadaDeAplicacaoTransmissoraCodificacaoBipolar(){
 
 }
 
-void CamadaFisicaTrasnmissora( int quadro) {
+void CamadaFisicaTransmissora( int quadro) {
     // int quadro[] deve ser utilizado apenas para a camada de enlace.
     int tipoDeCodificacao;  // alterar de acordo com o teste
     int fluxoBrutoDeBits; 

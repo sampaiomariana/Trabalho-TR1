@@ -23,7 +23,7 @@ void CamadaDeAplicacaoTransmissoraCodificacaoManchester();
 
 void CamadaDeAplicacaoTransmissoraCodificacaoBipolar();
 
-void CamadaFisicaTrasnmissora();
+void CamadaFisicaTransmissora();
 
 void CamadaDeAplicacaoTransmissora();
 

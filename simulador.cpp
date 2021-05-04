@@ -3,20 +3,13 @@
 #include <string>
 #include <stdlib.h>
 #include "camadafisica.h"
-#include "camadaenlace.h"
+#include "camadaenlace.cpp"
+
 
 using namespace std;
 
-
-
-int main() {
-		// Realiza a chamada para o simulador
-        //AplicacaoTransmissora();
-
-		int quadro;
-
-        CamadaEnlaceDadosTransmissoraEnquadramento(quadro);
-       
-    	
-        return 0;
+int main (){
+	int size = 26;
+	int quadro[size];
+	CamadaEnlaceDadosTransmissora(quadro);
 }
