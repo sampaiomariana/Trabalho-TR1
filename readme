@@ -1,4 +1,4 @@
-Trabalho 1: Simulador da camada física 
+Trabalho 2: Simulador da camada de enlace
 Aluna: Mariana Borges de Sampaio
 Matrícula: 180046926
 
@@ -18,6 +18,8 @@ Para compilação foi toda feita via terminal, sendo necessário apenas estar de
 - camadafisica.cpp
 - camadafisica.h
 - simulador.cpp
+- camadaenlace.cpp
+- camadaenlace.h
 
 Para compilar, siga o seguinte comando:
 >g++ -o simulador simulador.cpp

@@ -20,8 +20,8 @@ Para compilação foi toda feita via terminal, sendo necessário apenas estar de
 - simulador.cpp
 
 Para compilar, siga o seguinte comando:
->g++ -o teste simulador.cpp
->./teste
+>g++ -o simulador simulador.cpp
+>./simulador
 
 
 
