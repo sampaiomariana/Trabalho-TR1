@@ -3,7 +3,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "camadaenlace.h"
-#include "camadafisica.h"
+#include "camadafisica.cpp"
 
 
 using namespace std;
@@ -140,9 +140,23 @@ void CamadaDeEnlaceTransmissoraEnquadramentoInsercaoDeBytes(int quadro[]){
 	CamadaEnlaceDadosReceptora(quadro);
 
 }
+
+void CamadaDeEnlaceTransmissoraControleDeErro(int quadro[]){
+	int tipoDeControleDeErro;
+
+
+}
 void CamadaEnlaceDadosTransmissora (int quadro[]){
 	
 	CamadaEnlaceDadosTransmissoraEnquadramento(quadro);
+
+	//próxima camada 
+
+	CamadaDeEnlaceTransmissoraControleDeErro(quadro);
+
+	//próxima camada
+
+	//CamadaFisicaTransmissora();
 }
 
 void CamadaEnlaceDadosTransmissoraEnquadramento(int quadro[]){

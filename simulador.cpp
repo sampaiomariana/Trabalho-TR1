@@ -9,7 +9,7 @@
 using namespace std;
 
 int main (){
-	int size = 26;
+	int size = 32;
 	int quadro[size];
 	CamadaEnlaceDadosTransmissora(quadro);
 }
