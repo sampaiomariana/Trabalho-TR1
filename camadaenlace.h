@@ -13,7 +13,11 @@ void CamadaEnlaceDadosReceptoraDesenquadramento(int quadro[]);
 
 void CamadaEnlaceDadosReceptora(int quadro[]);
 
-void CamadaEnlaceDadosReceptoraEnquadramento(int quadro[]);
+void CamadaEnlaceDadosReceptoraDesenquadramentoContagemDeCaracteres(int quadro[]);
+
+void CamadaDeEnlaceTransmissoraEnquadramentoInsercaoDeBytes(int quadro[]);
+
+void CamadaEnlaceDadosReceptoraDesenquadramentoInsercaoDebytes(int quadro[]);
 
 
 
