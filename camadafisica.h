@@ -23,7 +23,7 @@ void CamadaDeAplicacaoTransmissoraCodificacaoManchester();
 
 void CamadaDeAplicacaoTransmissoraCodificacaoBipolar();
 
-void CamadaFisicaTransmissora();
+void CamadaFisicaTransmissora(int quadro[]);
 
 void CamadaDeAplicacaoTransmissora();
 

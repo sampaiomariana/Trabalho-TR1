@@ -11,6 +11,7 @@
 #include <algorithm>
 #include "camadafisica.h"
 
+
 using namespace std;
 
 
@@ -197,6 +198,17 @@ void MeioDeComunicacao (){
     }
     cout << endl;
 
+    // Provocar erro para a correção de erro
+
+   /* int procentagemDeErros = 0; //10%,20%...100%
+    int percentual;
+    fluxoBrutoDeBitsPontoA = fluxoBrutoDeBits;
+
+    while (fluxoBrutoDeBitsPontoB.lenght != fluxoBrutoDeBitsPontoA){
+
+    }*/
+
+
     cout << "O fluxo de bits em B eh: \n";
     for (i = 0; i < size; i++){
         fluxoBrutoDeBitsPontoB[i] =  fluxoBrutoDeBitsPontoA[i];
@@ -329,7 +341,7 @@ void CamadaDeAplicacaoTransmissoraCodificacaoBipolar(){
 
 }
 
-void CamadaFisicaTransmissora( int quadro) {
+void CamadaFisicaTransmissora( int quadro[]) {
     // int quadro[] deve ser utilizado apenas para a camada de enlace.
     int tipoDeCodificacao;  // alterar de acordo com o teste
     int fluxoBrutoDeBits; 
@@ -361,9 +373,13 @@ void CamadaFisicaTransmissora( int quadro) {
 
 void CamadaDeAplicacaoTransmissora(int mensagem){
     // int quadro [] = mensagem -> usado apenas na camada de enlace
-     int quadro =  mensagem;
     //chama a próxima camada
-    CamadaFisicaTrasnmissora(quadro);
+    //int quadro = mensagem;
+    int size = 32;
+    int quadro[size];
+
+    CamadaEnlaceDadosTransmissora(quadro);
+   // CamadaFisicaTransmissora();
 }
 
 void AplicacaoTransmissora(void){

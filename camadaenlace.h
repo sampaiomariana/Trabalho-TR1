@@ -19,6 +19,12 @@ void CamadaDeEnlaceTransmissoraEnquadramentoInsercaoDeBytes(int quadro[]);
 
 void CamadaEnlaceDadosReceptoraDesenquadramentoInsercaoDebytes(int quadro[]);
 
+void CamadaEnlaceDadosTransmissoraControleDeErroBitParidadePar(int quadro[]);
+
+void CamadaEnlaceDadosTransmissoraControleDeErroCRC(int quadro[]);
+
+void CamadaDeEnlaceTransmissoraControleDeErro(int quadro[]);
+
 
 
 

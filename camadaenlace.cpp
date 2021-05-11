@@ -3,10 +3,60 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "camadaenlace.h"
-#include "camadafisica.cpp"
+#include "camadafisica.h"
 
 
 using namespace std;
+
+void CamadaEnlaceDadosTransmissoraControleDeErroBitParidadePar(int quadro[]){
+
+	cout << "Bit Paridade par";
+	cout << "\n";
+	int size = 32;
+	int bit = 0;
+	// adiciona o novo bit no tamanho do quadro
+	int aux[size + 1];
+	int j = 0;
+	for (int j = 0; j < size; j++){
+		bit = bit ^ quadro[j];
+	}
+	for (j = 0; j < size; j++){
+		aux[j] = quadro[j];
+	}
+	// Para bit de paridade 0, deve ser inserido o bit 0.
+	aux[size] = bit;
+	//chama a camada física
+
+	CamadaFisicaTransmissora(quadro);
+}
+
+void CamadaEnlaceDadosTransmissoraControleDeErroCRC(int quadro[]){
+
+	// usar polinomio CRC-32 (IEEE 802)
+	int size;
+	//chama a camada física
+
+	CamadaFisicaTransmissora(quadro);
+
+}
+
+void CamadaDeEnlaceTransmissoraControleDeErro(int quadro[]){
+	int tipoDeControleDeErro;
+
+
+		cout << "\n";
+		cout << "\nTipo de Controle de Erro: \n 0 - Bit Paridade Par \n 1 - CRC\n ";
+		cin >> tipoDeControleDeErro;
+	
+	switch(tipoDeControleDeErro){
+		case 0: CamadaEnlaceDadosTransmissoraControleDeErroBitParidadePar(quadro);
+		break;
+		case 1: CamadaEnlaceDadosTransmissoraControleDeErroCRC(quadro);
+		break;
+	}
+
+
+}
 
 /*Considerando size = 32*/
 
@@ -96,7 +146,8 @@ void CamadaDeEnlaceTransmissoraEnquadramentoContagemDeCaracteres(int quadro[]){
 	}
 	
 	cout << "\n"<< endl;
-
+	//próxima camada - controle de erro
+	CamadaDeEnlaceTransmissoraControleDeErro(quadro);
 	//chama a próxima camada
 	CamadaEnlaceDadosReceptora(quadro);
 }
@@ -135,17 +186,14 @@ void CamadaDeEnlaceTransmissoraEnquadramentoInsercaoDeBytes(int quadro[]){
 		cout << novo_quadro[i];
 	cout << "\n";
 
-
+	// próxima camada controle de erro
+	CamadaDeEnlaceTransmissoraControleDeErro(quadro);
 	//chama a próxima camada
 	CamadaEnlaceDadosReceptora(quadro);
 
 }
 
-void CamadaDeEnlaceTransmissoraControleDeErro(int quadro[]){
-	int tipoDeControleDeErro;
 
-
-}
 void CamadaEnlaceDadosTransmissora (int quadro[]){
 	
 	CamadaEnlaceDadosTransmissoraEnquadramento(quadro);
@@ -197,6 +245,7 @@ void CamadaEnlaceDadosReceptoraDesenquadramentoContagemDeCaracteres(int quadro[]
 	cout << "\n";
 
 	//chama a próxima camada
+
 
 }
 
