@@ -10,30 +10,79 @@ using namespace std;
 
 void CamadaEnlaceDadosTransmissoraControleDeErroBitParidadePar(int quadro[]){
 
-	cout << "Bit Paridade par";
-	cout << "\n";
+	//cout << "Bit Paridade par";
+	//cout << "\n";
 	int size = 32;
 	int bit = 0;
 	// adiciona o novo bit no tamanho do quadro
 	int aux[size + 1];
 	int j = 0;
+	
 	for (int j = 0; j < size; j++){
-		bit = bit ^ quadro[j];
+		bit ^= quadro[j] & 1; //xor
+		quadro[j] >>= 1;
+		// Se o bit for 0 nada é alterado, se o bit for 1 altera entre 0 e 1
 	}
 	for (j = 0; j < size; j++){
 		aux[j] = quadro[j];
 	}
-	// Para bit de paridade 0, deve ser inserido o bit 0.
 	aux[size] = bit;
-	//chama a camada física
 
+	//chama a camada física
 	CamadaFisicaTransmissora(quadro);
 }
 
 void CamadaEnlaceDadosTransmissoraControleDeErroCRC(int quadro[]){
 
 	// usar polinomio CRC-32 (IEEE 802)
-	int size;
+	int size = 4;
+	int size_t = 8;
+	int gerador[size];
+	
+	//definindo gerador para 1001
+	gerador[0] = 1;
+	gerador[1] = 0;
+	gerador[2] = 0;
+	gerador[3] = 1;
+		
+	int i;
+	for (i = 5; i < size - 1; i++ ){
+		gerador[i] = 0;
+	}
+
+	cout << "Quadro:" << endl;
+	for (i = 1; i < size_t; i++){
+		cout << quadro[i];
+	}
+	cout << "\n";
+	cout << "Gerador:";
+	for (i = 0; i < size; i++){
+		cout << gerador[i];
+	}
+
+	cout << "\n";
+
+	int j;
+	int resto[size];
+	for (j = 0; j < size; j++){
+		if (resto[0] == 1){
+			for (i = 0; i < size; i++){ //xor
+				resto[j] ^= gerador[i];
+			}
+		}
+	}
+	
+	int quadro_n = quadro[i] && gerador[size];
+
+	cout << "Mensagem Transmitida:" << endl;
+	// Dobrar o tamanho do size para que não tenha problema na divisão
+	//Soma 3 considerando que o CRC seja 0000
+	for (i = 0; i < 2*size + 3; i ++){
+		cout <<  quadro_n;
+
+	}
+
+	cout << "\n";
 	//chama a camada física
 
 	CamadaFisicaTransmissora(quadro);
