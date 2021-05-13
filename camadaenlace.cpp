@@ -10,8 +10,6 @@ using namespace std;
 
 void CamadaEnlaceDadosTransmissoraControleDeErroBitParidadePar(int quadro[]){
 
-	//cout << "Bit Paridade par";
-	//cout << "\n";
 	int size = 32;
 	int bit = 0;
 	// adiciona o novo bit no tamanho do quadro
@@ -61,12 +59,13 @@ void CamadaEnlaceDadosTransmissoraControleDeErroCRC(int quadro[]){
 	}
 
 	cout << "\n";
-
+	// Códificação CRC
 	int j;
 	int resto[size];
 	for (j = 0; j < size; j++){
 		if (resto[0] == 1){
-			for (i = 0; i < size; i++){ //xor
+			for (i = 0; i < size; i++){ 
+				//xor
 				resto[j] ^= gerador[i];
 			}
 		}
@@ -355,6 +354,120 @@ void CamadaEnlaceDadosReceptoraEnquadramento(int quadro[]){
 
 		}
 }
+void CamadaEnlaceDadosReceptoraControleDeErroBitParidadePar (int quadro[]){
+	cout << "Verificação se houve erro:" << endl;
+	// Em 0 -> nada muda
+
+	int bit;
+	int size = 32;
+	int aux[size -1];
+	int i;
+	int n = 0;
+
+	for (i = 0; i < size ; i++){
+		n ^= quadro[i];
+	}
+
+	if ( n == 0){
+		cout << "Foi encontrado erro na transmissão do quadro." << endl;
+	} else  {
+		cout << "Não houve erro na transmissão do quadro." << endl;
+	}
+
+	for ( i = 0; i < size -1; i++){
+		//Novo quadro - > aux é igual ao quadro original
+		aux[i] =  quadro[i];
+	}
+
+	// Próxima camada
+
+	CamadaEnlaceDadosReceptoraEnquadramento(quadro);
+}
+
+void CamadaEnlaceDadosReceptoraControleDeErroCRC (int quadro []){
+	cout << "Verificação se houve erro:" << endl;
+	/* Para esse controle de erro, pode ser utilizado o início da implementação
+	que foi feita para a camada transmissora do CRC
+	*/
+
+	// usar polinomio CRC-32 (IEEE 802)
+	int size = 4;
+	int size_t = 8;
+	int gerador[size];
+	
+	//definindo gerador para 1001
+	gerador[0] = 1;
+	gerador[1] = 0;
+	gerador[2] = 0;
+	gerador[3] = 1;
+		
+	int i;
+	for (i = 5; i < size - 1; i++ ){
+		gerador[i] = 0;
+	}
+
+	cout << "Quadro:" << endl;
+	for (i = 1; i < size_t; i++){
+		cout << quadro[i];
+	}
+	cout << "\n";
+	cout << "Gerador:";
+	for (i = 0; i < size; i++){
+		cout << gerador[i];
+	}
+
+	// Implementação da decodificação do CRC
+	int j;
+	int resto[size];
+	
+	for ( j = 0; j < size + 3; j ++){
+		if (resto[0] == 1){
+			for (i = 0; i < size; i++){
+				//xor igual da codificação, trocando apenas o parâmetro j por i
+					resto[i] ^= gerador[i];
+			
+			}
+		}
+
+	// continuação da divisão
+	
+	if ( j < 2*size){
+		for (i = 0; i < size -1; i++){
+			resto[i] = resto[i];
+		}
+	}
+}
+	if (resto[size - 1] == 0)
+		cout << "\nA Mensagem foi recebida sem erro." << endl;
+	 else 
+		cout << "\nA Mensagem foi recebida com erro." << endl;
+	
+
+	cout << "\nA Mensagem recebida foi:" << endl;
+
+	for (i = 0; i < size + 4 ; i++){
+		cout << quadro[i];
+	}
+
+	// próxima camada 
+	CamadaEnlaceDadosReceptoraEnquadramento(quadro);
+}
+void CamadaEnlaceReceptoraControleDeErro(int quadro[]){
+
+	int tipoDeControleDeErro;
+
+		cout << "Camada Receptora" << endl;
+		cout << "\n";
+		cout << "\nTipo de Controle de Erro: \n 0 - Bit Paridade Par \n 1 - CRC\n ";
+		cin >> tipoDeControleDeErro;
+	
+	switch(tipoDeControleDeErro){
+		case 0: CamadaEnlaceDadosReceptoraControleDeErroBitParidadePar(quadro);
+		break;
+		case 1: CamadaEnlaceDadosReceptoraControleDeErroCRC(quadro);
+		break;
+	}
+}
 
 
 void CamadaEnlaceDadosReceptora(int quadro[]){
@@ -363,7 +476,7 @@ void CamadaEnlaceDadosReceptora(int quadro[]){
 	CamadaEnlaceDadosReceptoraEnquadramento(quadro);
 
 	//chama a próxima camada
-	//CamadaEnlaceReceptoraControleDeErro(quadro);
+	CamadaEnlaceReceptoraControleDeErro(quadro);
 
 	//chama a próxima camada
 
