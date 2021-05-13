@@ -21,7 +21,8 @@ A segunda parte do trabalho consiste em criar um simulador em c++ que desenvolva
 - Enquadramento por inserção de bytes
 - Desenquadramento por contagem de caracter
 - Desenquadramento por inserção de bytes
-- Correção de Erro
+- Correção de Erro usando Bit de paridade par
+- Correção de Erro usando CRC
 - Código Hamming 
 
 ## Especificações do SO 
