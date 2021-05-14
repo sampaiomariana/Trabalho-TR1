@@ -181,9 +181,11 @@ void CamadaFisicaReceptora(){
 
 
 void MeioDeComunicacao (){
-    // Nessa camada deve ocorrer a transmissão do fluxo de bits do ponto A para o ponto B
-    // Considerando tamanho máximo do fluxo de bits como size
-    int size;
+    /* Nessa camada deve ocorrer a transmissão do fluxo de bits do ponto A para o ponto B
+     Considerando tamanho máximo do fluxo de bits como size */
+    /*O meio de comunicação trabalha com bits*/
+        
+    int size = 8;
     int tipoDeCodificacao;
 
     int fluxoBrutoDeBits[size];
@@ -197,27 +199,34 @@ void MeioDeComunicacao (){
         cout << fluxoBrutoDeBitsPontoA[i];
     }
     cout << endl;
-
+    // Passando os bits do ponto A para o fluxo bruto de bits
+    fluxoBrutoDeBitsPontoA[size] = fluxoBrutoDeBits[size];
     // Provocar erro para a correção de erro
 
-   /* int procentagemDeErros = 0; //10%,20%...100%
-    int percentual;
-    fluxoBrutoDeBitsPontoA = fluxoBrutoDeBits;
+    srand(time(NULL)); // criar probabilidade
 
-    while (fluxoBrutoDeBitsPontoB.lenght != fluxoBrutoDeBitsPontoA){
+    int porcentagemDeErros;
+    int erro = 0;
 
-    }*/
+    for (i = 0; i < size; i++){
+        erro = rand()%100;
 
-
+        if (erro < 10){
+            cout << "Fluxo de bits:";
+            cout << "\n";
+            fluxoBrutoDeBits[i] ^=1;
+            cout << fluxoBrutoDeBits[i];
+        }
+    }
     cout << "O fluxo de bits em B eh: \n";
     for (i = 0; i < size; i++){
-        fluxoBrutoDeBitsPontoB[i] =  fluxoBrutoDeBitsPontoA[i];
+        fluxoBrutoDeBitsPontoB[i] =  fluxoBrutoDeBits[i];
         cout << fluxoBrutoDeBitsPontoB[i];
-        // Os bits sendo transferidos do Ponto A para o ponto B
+        // Os bits sendo transferidos do Ponto A para o ponto B 
     }
 
     cout << endl;
-    
+   
     // realizar a chamada da próxima camada
     CamadaFisicaReceptora();
 
