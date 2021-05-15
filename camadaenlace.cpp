@@ -2,6 +2,7 @@
 #include <iostream>
 #include <stdio.h>
 #include <stdlib.h>
+#include <vector>
 #include "camadaenlace.h"
 #include "camadafisica.h"
 
@@ -88,18 +89,78 @@ void CamadaEnlaceDadosTransmissoraControleDeErroCRC(int quadro[]){
 
 }
 
+void CamadaEnlaceDadosTransmissoraControleDeErroHamming(int quadro[]){
+	// implementação  do código para Hamming (11,7)
+
+	int size = 32;
+	int size_bits = 11;
+	int i;
+	int aux[size_bits];
+	std::vector<int> bit;
+	cout << "Mensagem recebida:";
+	cout << "\n";
+
+	for (i = 0; i < size_bits; i++){
+		//aux[size_bits] = quadro[i];
+		cout << quadro[i];
+	}
+
+	int P1 = 0;
+	int P2 = 0;
+	int P4 = 0;
+	int P8 = 0;
+
+	for (i = 0; i < size_bits; i++){
+
+		P1 = (aux[i] + aux [i + 3] + aux[i + 5] 
+			+ aux[i + 7] + aux[i + 9 ] + aux[i + 11]) % 2 == 0;
+		// verificar a paridade %2==0
+		bit.push_back(P1);
+		
+		P2 = (aux [i]  + aux[i + 3] + aux [i + 6] +
+			aux [i + 7] + aux [i + 10] + aux [i +11]) % 2 == 0;
+		bit.push_back(P2);
+		bit.push_back(aux[i]);
+
+		P4 = (aux[i]  + aux[i + 5] + aux [i + 6] + aux[i + 7]) % 2 == 0;
+		bit.push_back(P4);
+		bit.push_back(aux[i + 1]);
+		bit.push_back(aux[i + 2]);
+		bit.push_back(aux[i + 3]);
+
+		P8 = (aux[i] + aux [i + 9] + aux [i + 10] + aux [i + 11]) %2 == 0;
+		bit.push_back(P8);
+		bit.push_back(aux[i + 9]);
+		bit.push_back(aux[i + 10]);
+		bit.push_back(aux[i + 11]);
+
+		}
+	
+	cout << endl;
+	cout << "A mensagem transmitida eh:" << int(bit.size()) << endl;;
+		
+	
+	//chama a camada física
+
+	CamadaFisicaTransmissora(quadro);
+
+	}
+	 
+
 void CamadaDeEnlaceTransmissoraControleDeErro(int quadro[]){
 	int tipoDeControleDeErro;
 
 
 		cout << "\n";
-		cout << "\nTipo de Controle de Erro: \n 0 - Bit Paridade Par \n 1 - CRC\n ";
+		cout << "\nTipo de Controle de Erro: \n 0 - Bit Paridade Par \n 1 - CRC\n 2 - Código de Hamming\n ";
 		cin >> tipoDeControleDeErro;
 	
 	switch(tipoDeControleDeErro){
 		case 0: CamadaEnlaceDadosTransmissoraControleDeErroBitParidadePar(quadro);
 		break;
 		case 1: CamadaEnlaceDadosTransmissoraControleDeErroCRC(quadro);
+		break;
+		case 2:CamadaEnlaceDadosTransmissoraControleDeErroHamming(quadro);
 		break;
 	}
 
@@ -242,13 +303,14 @@ void CamadaDeEnlaceTransmissoraEnquadramentoInsercaoDeBytes(int quadro[]){
 }
 
 
+
 void CamadaEnlaceDadosTransmissora (int quadro[]){
 	
 	CamadaEnlaceDadosTransmissoraEnquadramento(quadro);
 
 	//próxima camada 
 
-	CamadaDeEnlaceTransmissoraControleDeErro(quadro);
+	//CamadaDeEnlaceTransmissoraControleDeErro(quadro);
 
 	//próxima camada
 
@@ -336,12 +398,14 @@ void CamadaEnlaceDadosReceptoraDesenquadramentoInsercaoDebytes(int quadro[]){
 	// chama a próxima camada
 }
 
+
+
 void CamadaEnlaceDadosReceptoraEnquadramento(int quadro[]){
 	/*Realiza a chamada para o tipo de desenquadramento*/
 	int tipoDesenquadramento;
 	
 		cout << "\n";
-		cout << "\nTipo de Desenquadramento: \n 0 - Contagem De Caracteres \n 1 - Inserção de Bytes\n ";
+		cout << "\nTipo de Enquadramento - Camada Receptora: \n 0 - Contagem De Caracteres \n 1 - Inserção de Bytes\n ";
 		cin >> tipoDesenquadramento;
 	
 	switch (tipoDesenquadramento){
@@ -351,6 +415,7 @@ void CamadaEnlaceDadosReceptoraEnquadramento(int quadro[]){
 		case 1:
 		CamadaEnlaceDadosReceptoraDesenquadramentoInsercaoDebytes(quadro);
 		break;
+		
 
 		}
 }
@@ -452,13 +517,58 @@ void CamadaEnlaceDadosReceptoraControleDeErroCRC (int quadro []){
 	// próxima camada 
 	CamadaEnlaceDadosReceptoraEnquadramento(quadro);
 }
+
+void  CamadaEnlaceDadosReceptoraControleDeErroDeHamming(int quadro[]){
+	// implementar de decoficação
+
+	int size = 32;
+	int size_bits = 11;
+	int i;
+	int total = 0;
+	int aux[size_bits];
+	std::vector<int> bit;
+	cout << "Mensagem recebida:";
+	cout << "\n";
+
+	for (i = 0; i < size_bits; i++){
+		//aux[size_bits] = quadro[i];
+		bit.push_back(quadro[i]);
+	}
+	for (i = 0; i < size; i++){
+		int M3 = 0;
+		int M5 = 0;
+		int M7 = 0;
+		int M9 = 0;
+		int M11 = 0;
+		
+		// Os valores de M3 a M11 podem receber valores de 0 ou 1
+		M3 = (bit[i + 0] ^ bit [i + 1]) == bit [i + 0];
+		M5 = (bit[i + 3] ^ bit [i + 0]) == bit [i + 0];
+		M7 = (bit[i + 3] ^ bit [i + 1]) == bit [i + 0];
+		M9 = (bit[i + 7] ^ bit [i + 0]) == bit [i + 0];
+		M11 = (bit[i + 7] ^ bit [i + 1]) == bit [i + 0];
+
+		total = quadro[i] && quadro [i + 1] && quadro [i + 3] && quadro[i + 7];
+	}
+
+	if (total == 2){
+		cout << "Houve erro na codificação de Hamming." << endl;
+
+	} else {
+		cout << "Não houve erro na codificação de Hamming." << endl;
+	}
+
+	cout << "Soma dos bits:" << total << endl;
+	// próxima camada 
+	CamadaEnlaceDadosReceptoraEnquadramento(quadro);
+}
 void CamadaEnlaceReceptoraControleDeErro(int quadro[]){
 
 	int tipoDeControleDeErro;
 
 		cout << "Camada Receptora" << endl;
 		cout << "\n";
-		cout << "\nTipo de Controle de Erro: \n 0 - Bit Paridade Par \n 1 - CRC\n ";
+		cout << "\nTipo de Controle de Erro: \n 0 - Bit Paridade Par \n 1 - CRC\n 2 - Código de Hamming\n ";
 		cin >> tipoDeControleDeErro;
 	
 	switch(tipoDeControleDeErro){
@@ -466,20 +576,19 @@ void CamadaEnlaceReceptoraControleDeErro(int quadro[]){
 		break;
 		case 1: CamadaEnlaceDadosReceptoraControleDeErroCRC(quadro);
 		break;
+		case 2: CamadaEnlaceDadosReceptoraControleDeErroDeHamming(quadro);
+		break;
 	}
 }
 
 
 void CamadaEnlaceDadosReceptora(int quadro[]){
-//implemente o código
+	//implemente o código
 	//chama a próxima camada
-	CamadaEnlaceDadosReceptoraEnquadramento(quadro);
-
+	//CamadaEnlaceDadosReceptoraEnquadramento(quadro);
 	//chama a próxima camada
 	CamadaEnlaceReceptoraControleDeErro(quadro);
-
 	//chama a próxima camada
-
-	//CamadaDeAplicacaoReceptora(quadro);
+	//CamadaDeAplicacaoReceptora();
 }
 

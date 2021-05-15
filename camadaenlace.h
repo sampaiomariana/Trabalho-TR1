@@ -29,7 +29,9 @@ void CamadaEnlaceDadosReceptoraControleDeErroBitParidadePar (int quadro[]);
 
 void CamadaEnlaceDadosReceptoraControleDeErroCRC (int quadro []);
 
+void CamadaEnlaceDadosTransmissoraControleDeErroHamming(int quadro[]);
 
+void  CamadaEnlaceDadosReceptoraControleDeErroDeHamming(int quadro[]);
 
 
 
