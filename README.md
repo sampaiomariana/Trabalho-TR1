@@ -4,7 +4,7 @@ Trabalho pr√°tico desenvolvido para a disciplina de TR1 na Universidade de Bras√
 
 ### Participantes do Projeto 
 
-|Projeto Engenharia de Software|  |
+|Projeto TR1|  |
 |--|--|
 | Mariana Borges de Sampaio|  180046926 |
 
